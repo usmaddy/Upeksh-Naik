@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    .slider {
+        height: 100vh;
+        margin-top: 0%;
+        position: relative;
+    }
+
+    .slider .list_image .item_image {
+        position: absolute;
+        inset: 0 0 0 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: .5s;
+    }
+
+    .slider .list_image .item_image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .slider .list_image .item_image::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        background-image: linear-gradient(to top, #000 40%, transparent);
+    }
+
+    .slider .list_image .item_image .content_of_image {
+        position: absolute;
+        left: 10%;
+        top: 20%;
+        width: 500px;
+        max-width: 80%;
+        z-index: 1;
+        color: aliceblue;
+        font-family: poppins;
+    }
+
+    .slider .list_image .item_image .content_of_image p:nth-child(1) {
+        text-transform: uppercase;
+        letter-spacing: 10px;
+    }
+
+    .slider .list_image .item_image .content_of_image h2 {
+        font-size: 100px;
+        margin: 0;
+    }
+
+    .slider .list_image .item_image.active {
+        opacity: 1;
+        z-index: 10;
+    }
+
+    @keyframes showcontent {
+        to {
+            transform: translateY(0);
+            filter: blur(0);
+            opacity: 1;
+        }
+    }
+
+    .slider .list_image .item_image.active p:nth-child(1),
+    .slider .list_image .item_image.active h2,
+    .slider .list_image .item_image.active p:nth-child(3) {
+        transform: translateY(30px);
+        filter: blur(20px);
+        opacity: 0;
+        animation: showcontent .5s .7s ease-in-out 1 forwards;
+    }
+
+    .slider .list_image .item_image.active h2 {
+        animation-delay: 1s;
+    }
+
+    .slider .list_image .item_image.active p:nth-child(3) {
+        animation-duration: 1.3s;
+
+    }
+
+    .arrows {
+        position: absolute;
+        top: 30%;
+        right: 50px;
+        z-index: 100;
+    }
+
+    .arrows button {
+        background-color: #eee5;
+        border: none;
+        font-family: monospace;
+        width: 40px;
+        height: 40px;
+        border-radius: 5px;
+        color: #eee;
+        transition: .5s;
+        font-size: x-large;
+    }
+
+    .arrows button:hover {
+        background-color: #eee;
+        color: #000;
+    }
+
+    .thumbnail {
+        position: absolute;
+        bottom: 50px;
+        z-index: 11;
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        height: 250px;
+        padding: 0 50px;
+        box-sizing: border-box;
+        overflow: auto;
+    }
+
+    .thumbnail::-webkit-scrollbar {
+        width: 0;
+    }
+
+    .thumbnail .item_image {
+        width: 150px;
+        height: 220px;
+        filter: brightness(.5);
+        transition: .5s;
+        flex-shrink: 0;
+    }
+
+    .thumbnail .item_image img {
+        width: 100%;
+        object-fit: cover;
+        border-radius: 10px;
+        height: 100%;
+    }
+
+    .thumbnail .item_image.active {
+        filter: brightness(1.5);
+    }
+
+    .thumbnail .item_image .content_of_image {
+        position: absolute;
+        inset: auto 10px 10px 10px;
+        color: #eee;
+        font-family: poppins;
+    }
+
+    @media screen and (max-width:678px) {
+        .thumbnail {
+            justify-content: start;
+        }
+
+        .slider .list_image .item_image .content_of_image h2 {
+            font-size: 60px;
+        }
+
+        .arrows {
+            top: 10%;
+        }
+    }
+</style>
+
+<body>
+    <div class="slider">
+        <div class="list_image">
+            <div class="item_image active">
+                <img src="https://th.bing.com/th/id/OIP.T1FfK4xzTlF5NzfFP7RqhwHaFj?rs=1&pid=ImgDetMain" alt="">
+                <div class="content_of_image">
+                    <p>brightness star</p>
+                    <h2>Sun</h2>
+                    <p>The Sun is the star at the center of our solar system, providing light, heat, and energy for life
+                        on Earth. It is a massive ball of hot, glowing gases primarily composed of hydrogen and helium.
+                        Through nuclear fusion, the Sun converts mass into energy, generating the sunlight that sustains
+                        life and drives the Earth's climate and weather systems.</p>
+                </div>
+            </div>
+            <div class="item_image ">
+                <img src="https://th.bing.com/th/id/OIP.pk7aTIeVqxfju4TVH7kfRQHaHa?rs=1&pid=ImgDetMain" alt="">
+                <div class="content_of_image">
+                    <p>Smallest Planet</p>
+                    <h2>Mercury</h2>
+                    <p>Mercury is the closest planet to the Sun, boasting extreme temperature variations between its
+                        scorching day side and freezing night side. It is a rocky world with a barren, cratered surface,
+                        resembling Earth's moon.</p>
+                </div>
+            </div>
+            <div class="item_image ">
+                <img src="https://th.bing.com/th/id/OIP.DcLn9ex94CAq5UcB5UfFwQHaHa?rs=1&pid=ImgDetMain" alt="">
+                <div class="content_of_image">
+                    <p>Hottest Planet</p>
+                    <h2>Venus</h2>
+                    <p> Venus is often called Earth's "sister planet" due to its similar size and composition, but it's
+                        a world of extreme conditions with a thick, toxic atmosphere of carbon dioxide. Its surface is
+                        shrouded in dense clouds of sulfuric acid, concealing a landscape dominated by vast volcanic
+                        plains and highland regions.</p>
+                </div>
+            </div>
+            <div class="item_image ">
+                <img src="https://th.bing.com/th/id/R.c2edd01a9be5783bdf64ea6a4dfe3e8d?rik=%2bRNpJ2PFB0htKw&riu=http%3a%2f%2feoimages.gsfc.nasa.gov%2fimages%2fimagerecords%2f36000%2f36019%2fAS8-16-2593_lrg.jpg&ehk=kVQ9QSU8gZRvJ2cFUPsu2YPNcmeiAMBZsFTXDbz12LY%3d&risl=&pid=ImgRaw&r=0" alt="">
+                <div class="content_of_image">
+                    <p>Our Home Planet</p>
+                    <h2>Earth</h2>
+                    <p> The third planet from the Sun, Earth is the only known planet to harbor life. It boasts a
+                        diverse array of ecosystems, from oceans to forests, and supports a rich tapestry of flora and
+                        fauna. Its atmosphere provides the right conditions for liquid water to exist, making it a haven
+                        for life as we know it.</p>
+                </div>
+            </div>
+            <div class="item_image ">
+                <img src="https://starwalk.space/gallery/images/mars-the-ultimate-guide/1920x1080.jpg" alt="">
+                <div class="content_of_image">
+                    <p>Red Planet</p>
+                    <h2>Mars</h2>
+                    <p> Mars, often called the "Red Planet" due to its rusty surface, is home to the largest volcano and
+                        deepest canyon in the solar system. It has intrigued scientists for decades with the possibility
+                        of past or present life and is a target for future human exploration and colonization.</p>
+                </div>
+            </div>
+            <div class="item_image">
+                <img src="https://solarsystem.nasa.gov/internal_resources/4204" alt="">
+                <div class="content_of_image">
+                    <p>Giant Planet</p>
+                    <h2>Jupiter</h2>
+                    <p> Jupiter is the largest planet in our solar system, known for its immense size and swirling bands
+                        of colorful clouds. It hosts a turbulent atmosphere with the Great Red Spot, a massive storm
+                        that has raged for centuries. Jupiter also has a diverse family of moons, including the four
+                        Galilean moons: Io, Europa, Ganymede, and Callisto.</p>
+                </div>
+            </div>
+            <div class="item_image ">
+                <img src="https://th.bing.com/th/id/R.919cbffaec2415447b7655a50f28ea0b?rik=cVUyBdgvONeCuA&riu=http%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fc%2fc7%2fSaturn_during_Equinox.jpg&ehk=%2bdRZi0W53FtL4fbG1XQWdf3fg2mWEQcD%2baFbMlucJ3Y%3d&risl=1&pid=ImgRaw&r=0" alt="">
+                <div class="content_of_image">
+                    <p>Ring Planet</p>
+                    <h2>Saturn</h2>
+                    <p>Saturn is famous for its stunning ring system, composed of icy particles ranging in size from
+                        tiny grains to large boulders. Beneath its mesmerizing rings lies a gas giant with a complex
+                        atmosphere and a plethora of moons, including Titan, which boasts lakes of liquid methane and
+                        ethane on its surface.</p>
+                </div>
+            </div>
+            <div class="item_image">
+                <img src="https://images.interestingengineering.com/img/iea/MRw4ZB55G1/uranus.jpg" alt="">
+                <div class="content_of_image">
+                    <p>Mysteries Planet</p>
+                    <h2>Uranus</h2>
+                    <p>Uranus is an ice giant planet tilted on its side, giving it unique seasons where each pole spends
+                        about 42 years in continuous sunlight or darkness. It has a faint ring system and a retinue of
+                        moons, including Miranda, which features some of the tallest cliffs and deepest canyons in the
+                        solar system.</p>
+                </div>
+            </div>
+            <div class="item_image">
+                <img src="https://media.nationalgeographic.org/assets/photos/000/261/26167.jpg" alt="">
+                <div class="content_of_image">
+                    <p>Ocean Planet</p>
+                    <h2>Neptune</h2>
+                    <p>Neptune, the farthest known planet from the Sun, is a cold and windy world with a vivid blue
+                        atmosphere. It is home to the fastest winds in the solar system and a mysterious dark spot
+                        reminiscent of Jupiter's Great Red Spot. Neptune's moon Triton is notable for its retrograde
+                        orbit and geysers spewing nitrogen gas into space.</p>
+                </div>
+            </div>
+            <div class="arrows">
+                <button id="prev"><</button>
+                <button id="next">></button>
+            </div>
+
+        </div>
+    </div>
+    <div class="thumbnail">
+        <div class="item_image active"><img src="https://th.bing.com/th/id/OIP.T1FfK4xzTlF5NzfFP7RqhwHaFj?rs=1&pid=ImgDetMain" alt="">
+            <div class="content_of_image">Sun</div>
+        </div>
+        <div class="item_image"><img src="https://th.bing.com/th/id/OIP.pk7aTIeVqxfju4TVH7kfRQHaHa?rs=1&pid=ImgDetMain" alt="">
+            <div class="content_of_image">Mercury</div>
+        </div>
+        <div class="item_image "><img src="https://th.bing.com/th/id/OIP.DcLn9ex94CAq5UcB5UfFwQHaHa?rs=1&pid=ImgDetMain" alt="">
+            <div class="content_of_image">Venus</div>
+        </div>
+        <div class="item_image "><img src="https://th.bing.com/th/id/R.c2edd01a9be5783bdf64ea6a4dfe3e8d?rik=%2bRNpJ2PFB0htKw&riu=http%3a%2f%2feoimages.gsfc.nasa.gov%2fimages%2fimagerecords%2f36000%2f36019%2fAS8-16-2593_lrg.jpg&ehk=kVQ9QSU8gZRvJ2cFUPsu2YPNcmeiAMBZsFTXDbz12LY%3d&risl=&pid=ImgRaw&r=0" alt="">
+            <div class="content_of_image">Earth</div>
+        </div>
+        <div class="item_image "><img src="https://starwalk.space/gallery/images/mars-the-ultimate-guide/1920x1080.jpg" alt="">
+            <div class="content_of_image">Mars</div>
+        </div>
+        <div class="item_image "><img src="https://solarsystem.nasa.gov/internal_resources/4204" alt="">
+            <div class="content_of_image">Jupiter</div>
+        </div>
+        <div class="item_image "><img src="https://th.bing.com/th/id/R.919cbffaec2415447b7655a50f28ea0b?rik=cVUyBdgvONeCuA&riu=http%3a%2f%2fupload.wikimedia.org%2fwikipedia%2fcommons%2fc%2fc7%2fSaturn_during_Equinox.jpg&ehk=%2bdRZi0W53FtL4fbG1XQWdf3fg2mWEQcD%2baFbMlucJ3Y%3d&risl=1&pid=ImgRaw&r=0" alt="">
+            <div class="content_of_image">Saturn</div>
+        </div>
+        <div class="item_image "><img src="https://images.interestingengineering.com/img/iea/MRw4ZB55G1/uranus.jpg" alt="">
+            <div class="content_of_image">Uranus</div>
+        </div>
+        <div class="item_image "><img src="https://media.nationalgeographic.org/assets/photos/000/261/26167.jpg" alt="">
+            <div class="content_of_image">Neptune</div>
+        </div>
+    </div>
+    <script>
+        let item_image = document.querySelectorAll('.slider .list_image .item_image');
+let next = document.getElementById('next');
+let prev = document.getElementById('prev');
+let thumbnails = document.querySelectorAll('.thumbnail .item_image');
+
+let countItem = item_image.length;
+let itemactive = 0;
+
+next.onclick = function(){
+    itemactive = itemactive +1;
+    if(itemactive >= countItem){
+        itemactive = 0;
+    }
+    showSlider();
+}
+prev.onclick = function(){
+    itemactive = itemactive - 1;
+    if(itemactive < 0){
+        itemactive = countItem - 1;
+    }
+    showSlider();
+}
+let refreshInterval = setInterval(()=>{
+    next.click();
+},5000);
+function showSlider(){
+    let itemactiveOld = document.querySelector('.slider .list_image .item_image.active');
+    let thumbnailActiceold = document.querySelector('.thumbnail .item_image.active');
+    itemactiveOld.classList.remove('active');
+    thumbnailActiceold.classList.remove('active');
+
+    item_image[itemactive].classList.add('active');
+    thumbnails[itemactive].classList.add('active');
+
+    clearInterval(refreshInterval);
+    refreshInterval = setInterval(()=>{
+        next.click();
+    },3000);
+}
+
+thumbnails.forEach((thumbnail , index)=>{
+    thumbnail.addEventListener('click',()=>{
+        itemactive = index;
+        showSlider();
+    })
+})
+</script>
+</body>
+
+</html>
